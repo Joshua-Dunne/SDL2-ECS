@@ -3,9 +3,6 @@
 #include <iostream>
 #include <string>
 #include "../include/TextureData.h"
-#include "../include/Defines.h"
-#include "../include/Player.h"
-
 class Game
 {
 public:
@@ -56,12 +53,4 @@ private:
 
     // Used to render images to a window
     SDL_Renderer* renderer = NULL;
-
-    Player player{Vector2(0,400)};
-    Vector2 m_velocity{Vector2(0,0)};
-
-    gpp::Events input;
-
-    SDL_Texture* m_playerTex = NULL;
-    TextureData m_playerTexData;
 };
