@@ -48,6 +48,9 @@ void Game::run()
 
     loadMedia();
 
+    player.addComponent(HealthComponent());
+    hs.addEntity(player);
+
     Uint64 end = SDL_GetPerformanceCounter();
 
     // calculate elapsed time for first frame
@@ -192,11 +195,13 @@ void Game::processKeyRelease(SDL_Event& e)
 void Game::update(float dt)
 {
    // std::cout << "Updating" << std::endl;
+   hs.update();
    
 }
 
 void Game::renderTexture(SDL_Texture* t_tex, TextureData t_texdata)
 {
+    /*
     //Set rendering space and render to screen
     SDL_Rect renderQuad;
     renderQuad.x = t_texdata.x;
@@ -213,6 +218,7 @@ void Game::renderTexture(SDL_Texture* t_tex, TextureData t_texdata)
     //Render to screen
     SDL_RenderCopyF(renderer, t_tex, &renderQuad, &fRenderQuad);
     SDL_RenderDrawRectF(renderer, &fRenderQuad);
+    */
 }
 
 void Game::render()

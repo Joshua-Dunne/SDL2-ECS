@@ -3,6 +3,10 @@
 #include <iostream>
 #include <string>
 #include "../include/TextureData.h"
+#include "../include/HealthSystem.h"
+#include "../include/HealthComponent.h"
+#include "../include/Entity.h"
+
 class Game
 {
 public:
@@ -53,4 +57,7 @@ private:
 
     // Used to render images to a window
     SDL_Renderer* renderer = NULL;
+
+    Entity player;
+    HealthSystem hs;
 };
