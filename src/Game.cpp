@@ -156,44 +156,15 @@ void Game::processEvents()
     //std::cout << "Processing Events" << std::endl;
     //While application is running
     while(SDL_PollEvent( &e ) != 0)
-    {
-        //User requests quit
+    { 
         if(e.type == SDL_QUIT)
         {
             m_gameIsRunning = false;
         }
 
-        if (e.type == SDL_KEYDOWN)
-	    {
-            processKeyPress(e);
-	    }
-
-	    if (e.type == SDL_KEYUP)
-	    {
-            processKeyRelease(e);
-	    }
-
-        if(e.type == SDL_MOUSEBUTTONDOWN)
-        {
-            processMouse(e.button);
-        }
+        // Control System updating
+        cs.processEvents(e)
     }
-}
-
-void Game::processMouse(SDL_MouseButtonEvent& b)
-{
-    // process mouse events
-}
-
-// e.key.keysym.sym == SDLK_w
-void Game::processKeyPress(SDL_Event& e)
-{
-    
-}
-
-void Game::processKeyRelease(SDL_Event& e)
-{
-	
 }
 
 void Game::update(float dt)

@@ -10,7 +10,12 @@ std::vector<Entity> entities;
 
 public:
     void addEntity(Entity e){ std::cout << "Adding Entity to Control System" << std::endl;}
-    void update(float& dt) {std::cout << "Updating Control System" << std::endl;}
+    void update(float& dt);
+    void processEvents(SDL_Event& e);
+    void processMouse(SDL_MouseButtonEvent& b)
+    void processKeyPress(SDL_Event& e)
+    void processKeyRelease(SDL_Event& e)
+
 };
 
 #endif
