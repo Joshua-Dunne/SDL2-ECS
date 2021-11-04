@@ -1,7 +1,7 @@
 BUILD_DIR	:= ./bin
 SRC_DIR		:= ./src
 
-OUTPUT_NAME	:= "SDL2_FSM"
+OUTPUT_NAME	:= "SDL2_ECS"
 COMP_FILES	:= ${SRC_DIR}/*
 
 INCLUDE		:= ${SDL_SDK}\include

@@ -49,7 +49,11 @@ void Game::run()
     loadMedia();
 
     player.addComponent(HealthComponent());
+    player.addComponent(InputComponent());
+    player.addComponent(PositionComponent());
     hs.addEntity(player);
+    cs.addEntity(player);
+    rs.addEntity(player);
 
     Uint64 end = SDL_GetPerformanceCounter();
 
@@ -195,7 +199,9 @@ void Game::processKeyRelease(SDL_Event& e)
 void Game::update(float dt)
 {
    // std::cout << "Updating" << std::endl;
-   hs.update();
+   hs.update(dt);
+   cs.update(dt);
+   rs.update(dt);
    
 }
 

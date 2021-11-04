@@ -3,8 +3,19 @@
 #include <iostream>
 #include <string>
 #include "../include/TextureData.h"
+
+// *** Systems ***
+#include "../include/ControlSystem.h"
+#include "../include/RenderSystem.h"
+#include "../include/AISystem.h"
 #include "../include/HealthSystem.h"
+
+// *** Components ***
 #include "../include/HealthComponent.h"
+#include "../include/PositionComponent.h"
+#include "../include/InputComponent.h"
+
+// *** Entity ***
 #include "../include/Entity.h"
 
 class Game
@@ -46,8 +57,8 @@ private:
     bool m_buttonPressed = false;
 
     //Screen dimension constants
-    const int SCREEN_WIDTH = 1600;
-    const int SCREEN_HEIGHT = 1200;
+    const int SCREEN_WIDTH = 1280;
+    const int SCREEN_HEIGHT = 720;
 
     //The window we'll be rendering to
     SDL_Window* window = NULL;
@@ -60,4 +71,6 @@ private:
 
     Entity player;
     HealthSystem hs;
+    ControlSystem cs;
+    RenderSystem rs;
 };
