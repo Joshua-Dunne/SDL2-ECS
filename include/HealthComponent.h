@@ -3,14 +3,10 @@
 
 #include "Component.h"
 
-class HealthComponent : public Component
+
+/* Data only */
+struct HealthComponent : public Component
 {
-public:
-    HealthComponent() : health(100) {}
-    /* Data only */
-    int getHealth() { return health; }
-    void setHealth(int t_health) { this->health = t_health; }
-private:
     int health;
 };
 

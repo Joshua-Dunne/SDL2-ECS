@@ -37,5 +37,5 @@ void ControlSystem::processKeyPress(SDL_Event& e)
 
 void ControlSystem::processKeyRelease(SDL_Event& e)
 {
-	
+
 }

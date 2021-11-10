@@ -8,7 +8,6 @@ void Entity::removeComponent(Component c)
         if (&(*it) == &(c))
         {
             components.erase(it);
-            
             break;
         }
     }

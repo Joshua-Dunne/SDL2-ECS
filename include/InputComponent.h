@@ -4,14 +4,9 @@
 #include "Component.h"
 #include <SDL2/SDL.h>
 
+/* Data only */
 class InputComponent : public Component
 {
-public:
-    InputComponent() : type(0){}
-    /* Data only */
-    int getType() { return type; }
-    void setType(int t_type) { this->type = t_type; }
-private:
     int type;
 };
 
