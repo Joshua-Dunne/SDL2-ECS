@@ -7,6 +7,7 @@
 /* Data only */
 struct HealthComponent : public Component
 {
+    HealthComponent() : Component(1) {};
     int health;
 };
 

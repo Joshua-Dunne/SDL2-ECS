@@ -1,5 +1,11 @@
 #include "../include/Entity.h"
 
+void Entity::addComponent(Component c)
+{
+    // Handling whether entities have specific componets or not is done outside this class
+    components.push_back(c);
+}
+
 void Entity::removeComponent(Component c)
 {
 

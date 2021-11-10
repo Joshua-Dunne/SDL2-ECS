@@ -7,6 +7,7 @@
 /* Data only */
 class InputComponent : public Component
 {
+    InputComponent() : Component(2) {};
     int type;
 };
 
