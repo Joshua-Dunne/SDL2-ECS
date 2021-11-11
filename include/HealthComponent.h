@@ -7,8 +7,9 @@
 /* Data only */
 struct HealthComponent : public Component
 {
-    HealthComponent() : Component(1) {};
-    int health;
+    HealthComponent() : Component("hp") {};
+    void setName(std::string t_name) {id = t_name;};
+    int health{100};
 };
 
 #endif

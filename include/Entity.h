@@ -10,11 +10,12 @@ class Entity
     int id;
 public:
     Entity() {};
-    void addComponent(Component c);
-    void removeComponent(Component c);
-    std::vector<Component> getComponents() {return components;}
+    void addComponent(Component* c);
+    void removeComponent(Component* c);
+    std::vector<Component*> getComponents() {return components;}
+    bool hasComponent(std::string t_name);
 private:
-    std::vector<Component> components;
+    std::vector<Component*> components;
 };
 
 #endif

@@ -3,24 +3,17 @@
 void ControlSystem::addEntity(Entity e)
 {
     std::cout << "Attemping to add Entity to Control System" << std::endl;
-    std::vector<Component> comps = e.getComponents();
+    std::vector<Component*> comps = e.getComponents();
     int count = 0;
 
     // In this implementation, there cannot be duplicate Entities,
     // so we do not need to do checks for duplicates.
     for(auto comp : comps)
     {
-        switch(comp.id)
-        {
-            case 1:
-                continue;
-            case 2:
-                count++;
-                break;
-            case 3:
-                count++;
-                break;
-        }
+        if(comp->id == "input")
+            count++;
+        if(comp->id == "pos")
+            count++;
     }
 
     // Control System needs Input and Position, so if we count 2 required components, add the Entity
@@ -36,27 +29,22 @@ void ControlSystem::addEntity(Entity e)
 void ControlSystem::update(float& dt)
 {
     std::cout << "Updating Control System" << std::endl;
+    /*
     for(auto ent : entities)
     {
-        std::vector<Component> ent = e.getComponents();
+        std::vector<Component*> ent = e.getComponents();
 
         // In this implementation, there cannot be duplicate Entities,
         // so we do not need to do checks for duplicates.
         for(auto comp : comps)
         {
-            switch(comp.id)
-            {
-                case 1:
-                    continue;
-                case 2:
-                    count++;
-                    break;
-                case 3:
-                    count++;
-                    break;
-            }
+            if(comp->id == "input")
+                count++;
+            if(comp->id == "pos")
+                count++;
         }
     }
+    */
 }
 
 void ControlSystem::processEvents(SDL_Event& e)

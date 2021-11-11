@@ -7,7 +7,8 @@
 /* Data only */
 struct PositionComponent : public Component
 {
-    PositionComponent() : Component(3) {};
+    PositionComponent() : Component("pos") {};
+    void setName(std::string t_name) {id = t_name;};
     Vector2 m_pos;
 };
 

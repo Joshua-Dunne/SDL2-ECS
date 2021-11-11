@@ -48,9 +48,11 @@ void Game::run()
 
     loadMedia();
 
-    player.addComponent(HealthComponent());
-    player.addComponent(InputComponent());
-    player.addComponent(PositionComponent());
+    player.addComponent(new HealthComponent());
+    player.addComponent(new InputComponent());
+    player.addComponent(new PositionComponent());
+    player.addComponent(new TextureComponent("dummy", renderer));
+    
     hs.addEntity(player);
     cs.addEntity(player);
     rs.addEntity(player);
@@ -163,7 +165,7 @@ void Game::processEvents()
         }
 
         // Control System updating
-        cs.processEvents(e)
+        cs.processEvents(e);
     }
 }
 
@@ -174,28 +176,6 @@ void Game::update(float dt)
    cs.update(dt);
    rs.update(dt);
    
-}
-
-void Game::renderTexture(SDL_Texture* t_tex, TextureData t_texdata)
-{
-    /*
-    //Set rendering space and render to screen
-    SDL_Rect renderQuad;
-    renderQuad.x = t_texdata.x;
-    renderQuad.y = t_texdata.y;
-    renderQuad.w = t_texdata.width;
-    renderQuad.h = t_texdata.height;
-
-    SDL_FRect fRenderQuad;
-    fRenderQuad.x = player.m_pos.x;
-    fRenderQuad.y = player.m_pos.y;
-    fRenderQuad.w = t_texdata.width; 
-    fRenderQuad.h = t_texdata.height;
-
-    //Render to screen
-    SDL_RenderCopyF(renderer, t_tex, &renderQuad, &fRenderQuad);
-    SDL_RenderDrawRectF(renderer, &fRenderQuad);
-    */
 }
 
 void Game::render()
@@ -212,9 +192,7 @@ void Game::render()
 
         SDL_RenderClear(renderer);
 
-        // Render Textures here
-        // Example: renderTexture(m_playerTex, *player.getAnimatedSpriteFrame());
-        
+        rs.render(renderer);
 
         SDL_RenderPresent(renderer);
     }

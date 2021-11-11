@@ -2,11 +2,12 @@
 #define COMP_H
 #include <iostream>
 
-class Component
+struct Component
 {
-    Component() = delete;
-    Component(int t_id) {id = t_id;}
-    int id;
+    Component();
+    Component(std::string t_name) {id = t_name;}
+    virtual void setName(std::string t_name) = 0;
+    std::string id = "empty";
 };
 
 #endif
