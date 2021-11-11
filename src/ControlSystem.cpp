@@ -17,6 +17,7 @@ void ControlSystem::addEntity(Entity e)
     }
 
     // Control System needs Input and Position, so if we count 2 required components, add the Entity
+    // There cannot be duplicate Components so we only need to check for exactly 2
     if(count == 2)
     {
         std::cout << "Entity has Input and Pos - Adding to Control" << std::endl;
@@ -28,27 +29,47 @@ void ControlSystem::addEntity(Entity e)
 
 void ControlSystem::update(float& dt)
 {
-    std::cout << "Updating Control System" << std::endl;
-    /*
     for(auto ent : entities)
     {
-        std::vector<Component*> ent = e.getComponents();
+        std::vector<Component*> comps = ent.getComponents();
 
-        // In this implementation, there cannot be duplicate Entities,
-        // so we do not need to do checks for duplicates.
+        InputComponent* ic;
+        PositionComponent* pc;
+
         for(auto comp : comps)
         {
-            if(comp->id == "input")
-                count++;
             if(comp->id == "pos")
-                count++;
+            {
+                pc = dynamic_cast<PositionComponent*>(comp);
+            }
+            else if(comp->id == "input")
+            {
+                ic = dynamic_cast<InputComponent*>(comp);
+                //currentInput = e.key.keysym.sym;
+            }
         }
+
+        // Now that we have both necessary items, we can do key presses
+        if (ic->type == SDLK_w && ic->press)
+            pc->m_pos = pc->m_pos + Vector2(0.0f,-3.0f);
+
+        if (ic->type == SDLK_a && ic->press)
+            pc->m_pos = pc->m_pos + Vector2(-3.0f, 0.0f);
+
+        if (ic->type == SDLK_s && ic->press)
+            pc->m_pos = pc->m_pos + Vector2(0.0f,3.0f);
+
+        if (ic->type == SDLK_d && ic->press)
+            pc->m_pos = pc->m_pos + Vector2(3.0f, 0.0f);
+
+        std::cout << "After, X: " << pc->m_pos.x << ", Y:" << pc->m_pos.y << std::endl;
     }
-    */
 }
 
 void ControlSystem::processEvents(SDL_Event& e)
 {
+    std::cout << "Processing Event" << std::endl;
+
     if (e.type == SDL_KEYDOWN)
 	{
         processKeyPress(e);
@@ -74,10 +95,51 @@ void ControlSystem::processMouse(SDL_MouseButtonEvent& b)
 void ControlSystem::processKeyPress(SDL_Event& e)
 {
     // example: e.key.keysym.sym == SDLK_w
+    std::cout << "Key was pressed!" << std::endl;
+    InputComponent* ic;
 
+    for(auto ent : entities)
+    {
+        std::vector<Component*> comps = ent.getComponents();
+
+        for(auto comp : comps)
+        {
+            if(comp->id != "input")
+                continue;
+            else
+            {
+                ic = dynamic_cast<InputComponent*>(comp);
+                ic->type = e.key.keysym.sym;
+                std::cout << "found key: " << ic->type << std::endl;
+                ic->press = true;
+                //currentInput = e.key.keysym.sym;
+            }
+        }
+    }
 }
 
 void ControlSystem::processKeyRelease(SDL_Event& e)
 {
+    // example: e.key.keysym.sym == SDLK_w
+    std::cout << "Key was Released!" << std::endl;
 
+    InputComponent* ic;
+
+    for(auto ent : entities)
+    {
+        std::vector<Component*> comps = ent.getComponents();
+
+        for(auto comp : comps)
+        {
+            if(comp->id != "input")
+                continue;
+            else
+            {
+                ic = dynamic_cast<InputComponent*>(comp);
+                ic->type = e.key.keysym.sym;
+                ic->press = false;
+                //currentInput = e.key.keysym.sym;
+            }
+        }
+    }
 }

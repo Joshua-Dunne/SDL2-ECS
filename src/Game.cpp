@@ -164,7 +164,7 @@ void Game::processEvents()
             m_gameIsRunning = false;
         }
 
-        // Control System updating
+        // Control System processing key presses
         cs.processEvents(e);
     }
 }
@@ -175,7 +175,7 @@ void Game::update(float dt)
    hs.update(dt);
    cs.update(dt);
    rs.update(dt);
-   
+
 }
 
 void Game::render()
@@ -192,6 +192,7 @@ void Game::render()
 
         SDL_RenderClear(renderer);
 
+        // Render System renders any Entities it can
         rs.render(renderer);
 
         SDL_RenderPresent(renderer);

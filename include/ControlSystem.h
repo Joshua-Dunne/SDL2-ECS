@@ -3,7 +3,10 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "../include/Entity.h"
+#include <vector>
+#include "Entity.h"
+#include "InputComponent.h"
+#include "PositionComponent.h"
 
 class ControlSystem
 {

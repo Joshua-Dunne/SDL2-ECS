@@ -13,7 +13,7 @@ std::vector<Entity> entities;
 
 public:
     void addEntity(Entity e){ std::cout << "Adding Entity to Render System" << std::endl;}
-    void update(float& dt) {std::cout << "Updating Render System" << std::endl;}
+    void update(float& dt) {/*std::cout << "Updating Render System" << std::endl;*/}
     void render(SDL_Renderer* r);
     void renderTexture(SDL_Renderer* r, PositionComponent* pos, TextureComponent* tex);
     
