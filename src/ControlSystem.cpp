@@ -38,25 +38,21 @@ void ControlSystem::update(float& dt)
 
         // Now that we have both necessary items, we can do key presses
         if (ic->type == SDLK_w && ic->press)
-            pc->m_pos = pc->m_pos + Vector2(0.0f,-3.0f);
+            pc->m_pos = pc->m_pos + Vector2(0.0f,-m_speed * dt);
 
         if (ic->type == SDLK_a && ic->press)
-            pc->m_pos = pc->m_pos + Vector2(-3.0f, 0.0f);
+            pc->m_pos = pc->m_pos + Vector2(-m_speed * dt, 0.0f);
 
         if (ic->type == SDLK_s && ic->press)
-            pc->m_pos = pc->m_pos + Vector2(0.0f,3.0f);
+            pc->m_pos = pc->m_pos + Vector2(0.0f,m_speed * dt);
 
         if (ic->type == SDLK_d && ic->press)
-            pc->m_pos = pc->m_pos + Vector2(3.0f, 0.0f);
-
-        std::cout << "After, X: " << pc->m_pos.x << ", Y:" << pc->m_pos.y << std::endl;
+            pc->m_pos = pc->m_pos + Vector2(m_speed * dt, 0.0f);
     }
 }
 
 void ControlSystem::processEvents(SDL_Event& e)
 {
-    std::cout << "Processing Event" << std::endl;
-
     if (e.type == SDL_KEYDOWN)
 	{
         processKeyPress(e);
@@ -81,8 +77,6 @@ void ControlSystem::processMouse(SDL_MouseButtonEvent& b)
 
 void ControlSystem::processKeyPress(SDL_Event& e)
 {
-    // example: e.key.keysym.sym == SDLK_w
-    std::cout << "Key was pressed!" << std::endl;
     InputComponent* ic;
 
     for(auto ent : entities)
@@ -107,9 +101,6 @@ void ControlSystem::processKeyPress(SDL_Event& e)
 
 void ControlSystem::processKeyRelease(SDL_Event& e)
 {
-    // example: e.key.keysym.sym == SDLK_w
-    std::cout << "Key was Released!" << std::endl;
-
     InputComponent* ic;
 
     for(auto ent : entities)
