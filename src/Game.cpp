@@ -51,7 +51,7 @@ void Game::run()
     player.addComponent(new HealthComponent());
     player.addComponent(new InputComponent());
     player.addComponent(new PositionComponent());
-    player.addComponent(new TextureComponent("dummy", renderer));
+    player.addComponent(new TextureComponent("../assets/images/ghost.png", renderer));
     
     hs.addEntity(player);
     cs.addEntity(player);
