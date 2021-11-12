@@ -1,5 +1,23 @@
 #include "../include/RenderSystem.h"
 
+void RenderSystem::addEntity(Entity e)
+{
+    std::cout << "Attempgin to add Entity to Render System" << std::endl;
+
+    // Requires a Position and a Texture Component
+    // This is because it wouldn't make sense to render an Entity
+    // that only has a Position, and vice versa.
+    if(e.hasComponent("pos") && e.hasComponent("tex"))
+    {
+        std::cout << "Entity has either Position or Texture, Adding to Render." << std::endl;
+        entities.push_back(e);
+    }
+    else
+    {
+        std::cout << "Entity is missing a required component, not adding to Render." << std::endl;
+    }
+}
+
 void RenderSystem::render(SDL_Renderer* r)
 {
     for(auto entity : entities)
@@ -17,15 +35,13 @@ void RenderSystem::render(SDL_Renderer* r)
                 else if(comp->id == "tex")
                     tc = dynamic_cast<TextureComponent*>(comp);
             }
-
             renderTexture(r, pc, tc);
         }
-        
     }
 }
 
 void RenderSystem::renderTexture(SDL_Renderer* r, PositionComponent* pos, TextureComponent* tex)
-{  
+{
     //Set rendering space and render to screen
     SDL_Rect renderQuad;
     renderQuad.x = tex->data.x;
@@ -36,7 +52,7 @@ void RenderSystem::renderTexture(SDL_Renderer* r, PositionComponent* pos, Textur
     SDL_FRect fRenderQuad;
     fRenderQuad.x = pos->m_pos.x;
     fRenderQuad.y = pos->m_pos.y;
-    fRenderQuad.w = tex->data.width; 
+    fRenderQuad.w = tex->data.width;
     fRenderQuad.h = tex->data.height;
 
     //Render to screen

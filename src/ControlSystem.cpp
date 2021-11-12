@@ -3,28 +3,15 @@
 void ControlSystem::addEntity(Entity e)
 {
     std::cout << "Attemping to add Entity to Control System" << std::endl;
-    std::vector<Component*> comps = e.getComponents();
-    int count = 0;
-
-    // In this implementation, there cannot be duplicate Entities,
-    // so we do not need to do checks for duplicates.
-    for(auto comp : comps)
-    {
-        if(comp->id == "input")
-            count++;
-        if(comp->id == "pos")
-            count++;
-    }
-
-    // Control System needs Input and Position, so if we count 2 required components, add the Entity
-    // There cannot be duplicate Components so we only need to check for exactly 2
-    if(count == 2)
+    if(e.hasComponent("pos") && e.hasComponent("input"))
     {
         std::cout << "Entity has Input and Pos - Adding to Control" << std::endl;
         entities.push_back(e);
     }
     else
+    {
         std::cout << "Entity is missing a required component, not adding to Control." << std::endl;
+    }
 }
 
 void ControlSystem::update(float& dt)
