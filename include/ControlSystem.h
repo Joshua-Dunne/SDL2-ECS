@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <vector>
+#include "globals.h"
 #include "Entity.h"
 #include "InputComponent.h"
 #include "PositionComponent.h"
@@ -23,6 +24,8 @@ public:
 private:
     int currentInput = 0;
     float m_speed = 100.0f;
+
+    void boundaryCheck(Vector2& t_currentPos);
 
 };
 

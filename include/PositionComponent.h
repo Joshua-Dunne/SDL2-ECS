@@ -8,6 +8,7 @@
 struct PositionComponent : public Component
 {
     PositionComponent() : Component("pos") {};
+    PositionComponent(Vector2 t_pos) : Component("pos"), m_pos(t_pos) {};
     void setName(std::string t_name) {id = t_name;};
     Vector2 m_pos;
 };

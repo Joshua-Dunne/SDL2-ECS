@@ -51,11 +51,11 @@ void Game::run()
     // adding requested components
     player.addComponent(new HealthComponent());
     player.addComponent(new InputComponent());
-    player.addComponent(new PositionComponent());
+    player.addComponent(new PositionComponent(Vector2(100.0f, 100.0f)));
     player.addComponent(new TextureComponent("../assets/images/ghost.png", renderer));
 
     villain.addComponent(new HealthComponent());
-    villain.addComponent(new PositionComponent());
+    villain.addComponent(new PositionComponent(Vector2(SCREEN_WIDTH - 100.0f, SCREEN_HEIGHT - 100.0f)));
     villain.addComponent(new TextureComponent("../assets/images/ai.png", renderer));
 
     //cortana.addComponent(new HealthComponent());

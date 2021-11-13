@@ -48,6 +48,9 @@ void ControlSystem::update(float& dt)
 
         if (ic->type == SDLK_d && ic->press)
             pc->m_pos = pc->m_pos + Vector2(m_speed * dt, 0.0f);
+        
+        if(ic->press)
+            boundaryCheck(pc->m_pos);
     }
 }
 
@@ -118,5 +121,26 @@ void ControlSystem::processKeyRelease(SDL_Event& e)
                 //currentInput = e.key.keysym.sym;
             }
         }
+    }
+}
+
+// Keeps Player in-bounds, so they don't go off screen and get lost
+void ControlSystem::boundaryCheck(Vector2& t_currentPos)
+{
+    if(t_currentPos.x < 0.0f)
+    {
+        t_currentPos.x = 0.0f;
+    }
+    else if(t_currentPos.x > SCREEN_WIDTH)
+    {
+        t_currentPos.x = SCREEN_WIDTH;
+    }
+    if(t_currentPos.y < 0.0f)
+    {
+        t_currentPos.y = 0.0f;
+    }
+    else if(t_currentPos.y > SCREEN_HEIGHT)
+    {
+        t_currentPos.y = SCREEN_HEIGHT;
     }
 }
