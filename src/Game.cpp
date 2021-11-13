@@ -48,14 +48,28 @@ void Game::run()
 
     loadMedia();
 
+    // adding requested components
     player.addComponent(new HealthComponent());
     player.addComponent(new InputComponent());
     player.addComponent(new PositionComponent());
     player.addComponent(new TextureComponent("../assets/images/ghost.png", renderer));
+
+    villain.addComponent(new HealthComponent());
+    villain.addComponent(new PositionComponent());
+    villain.addComponent(new TextureComponent("../assets/images/ai.png", renderer));
+
+    //cortana.addComponent(new HealthComponent());
+    //cortana.addComponent(new PositionComponent());
+
+    //dinkyDi.addComponent(new PositionComponent());
     
     hs.addEntity(player);
     cs.addEntity(player);
     rs.addEntity(player);
+
+    hs.addEntity(villain);
+    rs.addEntity(villain);
+    as.addEntity(villain);
 
     Uint64 end = SDL_GetPerformanceCounter();
 
@@ -175,6 +189,7 @@ void Game::update(float dt)
    hs.update(dt);
    cs.update(dt);
    rs.update(dt);
+   as.update(dt);
 
 }
 

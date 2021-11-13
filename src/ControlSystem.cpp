@@ -91,7 +91,6 @@ void ControlSystem::processKeyPress(SDL_Event& e)
             {
                 ic = dynamic_cast<InputComponent*>(comp);
                 ic->type = e.key.keysym.sym;
-                std::cout << "found key: " << ic->type << std::endl;
                 ic->press = true;
                 //currentInput = e.key.keysym.sym;
             }

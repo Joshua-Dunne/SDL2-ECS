@@ -2,21 +2,22 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <string>
-#include "../include/TextureData.h"
+#include "globals.h"
+#include "TextureData.h"
 
 // *** Systems ***
-#include "../include/ControlSystem.h"
-#include "../include/RenderSystem.h"
-#include "../include/AISystem.h"
-#include "../include/HealthSystem.h"
+#include "ControlSystem.h"
+#include "RenderSystem.h"
+#include "AISystem.h"
+#include "HealthSystem.h"
 
 // *** Components ***
-#include "../include/HealthComponent.h"
-#include "../include/PositionComponent.h"
-#include "../include/InputComponent.h"
+#include "HealthComponent.h"
+#include "PositionComponent.h"
+#include "InputComponent.h"
 
 // *** Entity ***
-#include "../include/Entity.h"
+#include "Entity.h"
 
 class Game
 {
@@ -56,10 +57,6 @@ private:
 
     bool m_buttonPressed = false;
 
-    //Screen dimension constants
-    const int SCREEN_WIDTH = 1280;
-    const int SCREEN_HEIGHT = 720;
-
     //The window we'll be rendering to
     SDL_Window* window = NULL;
 
@@ -70,7 +67,13 @@ private:
     SDL_Renderer* renderer = NULL;
 
     Entity player;
+    Entity villain;
+    //Entity cortana;
+    //Entity dinkyDi;
+
+
     HealthSystem hs;
     ControlSystem cs;
     RenderSystem rs;
+    AISystem as;
 };
