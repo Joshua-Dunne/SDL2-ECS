@@ -22,7 +22,7 @@ public:
 
 private:
     int currentInput = 0;
-    float m_speed = 30.0f;
+    float m_speed = 100.0f;
 
 };
 

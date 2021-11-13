@@ -17,10 +17,12 @@ public:
 
 private:
     Vector2 boundaryCheck(Vector2 t_currentPos);
+    void pickHeading();
 
-    const float c_MAX_TIME = 2.0f;
+    const float c_MAX_TIME = 2.5f;
     float m_currentTime = 0.0f;
-    float m_speed = 200.0f;
+    float m_speed = 100.0f;
+    Vector2 m_heading{0.0f, 0.0f};
 };
 
 #endif

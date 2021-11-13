@@ -25,6 +25,29 @@ void AISystem::update(float& dt)
         for(auto ent : entities)
         {
             std::vector<Component*> comps = ent.getComponents();
+            HealthComponent* hc;
+
+            for(auto comp : comps)
+            {
+                if(comp->id == "hp")
+                {
+                    hc = dynamic_cast<HealthComponent*>(comp);
+                    //currentInput = e.key.keysym.sym;
+                }
+            }
+
+            // Pick a new heading if alive
+            if(hc->health > 0)
+            {
+                pickHeading();
+            }
+        }
+    }
+    else if (m_currentTime < c_MAX_TIME)
+    {
+        for(auto ent : entities)
+        {
+            std::vector<Component*> comps = ent.getComponents();
 
             PositionComponent* pc;
             HealthComponent* hc;
@@ -45,24 +68,7 @@ void AISystem::update(float& dt)
             // AI will only move if they are alive
             if(hc->health > 0)
             {
-                int random = (rand() % 4) + 1; // range of 0 - 3 (+ 1, so 1 - 4)
-                // Now that we have both necessary items, we can do key presses
-                switch(random)
-                {
-                    case 1:
-                        pc->m_pos = pc->m_pos + Vector2(0.0f,-m_speed * dt); // Up
-                        break;
-                    case 2:
-                        pc->m_pos = pc->m_pos + Vector2(-m_speed * dt, 0.0f); // Left
-                        break;
-                    case 3:
-                        pc->m_pos = pc->m_pos + Vector2(0.0f,m_speed * dt); // Down
-                        break;
-                    case 4:
-                        pc->m_pos = pc->m_pos + Vector2(m_speed * dt, 0.0f); // Right
-                        break;
-                }
-
+                pc->m_pos = pc->m_pos + (m_heading * dt);
                 pc->m_pos = boundaryCheck(pc->m_pos);
             }
         }
@@ -81,4 +87,32 @@ Vector2 AISystem::boundaryCheck(Vector2 t_currentPos)
         t_currentPos.y = SCREEN_HEIGHT;
 
     return t_currentPos;
+}
+
+void AISystem::pickHeading()
+{
+    int random = (rand() % 5) + 1; // range of 0 - 4 (+ 1, so 1 - 5)
+    switch(random)
+    {
+        case 1:
+            m_heading.x = 0.0f;
+            m_heading.y = -m_speed; // Up
+            break;
+        case 2:
+            m_heading.x = -m_speed; // Left
+            m_heading.y = 0.0f;
+            break;
+        case 3:
+            m_heading.x = 0.0f;
+            m_heading.y = m_speed; // Down
+            break;
+        case 4:
+            m_heading.x = m_speed; // Right
+            m_heading.y = 0.0f;
+            break;
+        case 5: // in this case the AI chooses not to move
+            m_heading.x = 0.0f;
+            m_heading.y = 0.0f;
+            break;
+    }
 }
