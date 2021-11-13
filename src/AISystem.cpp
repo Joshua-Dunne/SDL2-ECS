@@ -77,14 +77,33 @@ void AISystem::update(float& dt)
 
 Vector2 AISystem::boundaryCheck(Vector2 t_currentPos)
 {
+    // Keeps AI in-bounds
+    // If AI hits a boundary, turns them around,
+    // and resets their timer to decide next movement
     if(t_currentPos.x < 0.0f)
+    {
         t_currentPos.x = 0.0f;
-    if(t_currentPos.x > SCREEN_WIDTH)
+        m_heading.x *= -1;
+        m_currentTime = 0.0f;
+    }
+    else if(t_currentPos.x > SCREEN_WIDTH)
+    {
         t_currentPos.x = SCREEN_WIDTH;
+        m_heading.x *= -1;
+        m_currentTime = 0.0f;
+    }
     if(t_currentPos.y < 0.0f)
+    {
         t_currentPos.y = 0.0f;
-    if(t_currentPos.y > SCREEN_HEIGHT)
+        m_heading.y *= -1;
+        m_currentTime = 0.0f;
+    }
+    else if(t_currentPos.y > SCREEN_HEIGHT)
+    {
         t_currentPos.y = SCREEN_HEIGHT;
+        m_heading.y *= -1;
+        m_currentTime = 0.0f;
+    }
 
     return t_currentPos;
 }
