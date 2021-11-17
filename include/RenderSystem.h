@@ -13,7 +13,7 @@ std::vector<Entity> entities;
 
 public:
     void addEntity(Entity e);
-    void render(SDL_Renderer* r);
+    void render(SDL_Renderer* r, SDL_Window* t_window);
     void renderTexture(SDL_Renderer* r, PositionComponent* pos, TextureComponent* tex);
     
 };

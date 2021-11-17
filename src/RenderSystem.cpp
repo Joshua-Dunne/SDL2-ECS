@@ -4,12 +4,19 @@ void RenderSystem::addEntity(Entity e)
 {
     std::cout << "Attempting to add " << e.getName() << " to Render System" << std::endl;
 
-    // Requires a Position and a Texture Component
-    // This is because it wouldn't make sense to render an Entity
-    // that only has a Position, and vice versa.
-    if(e.hasComponent("pos") && e.hasComponent("tex"))
+    // Requires a Position or a Texture Component
+    // If the Entity only has a Position,
+    // the Entity is drawn as a black square
+    if(e.hasComponent("pos"))
     {
-        std::cout << e.getName() << " has both Position and Texture, adding to Render." << std::endl;
+        if(e.hasComponent("tex"))
+        {
+            std::cout << e.getName() << " has both Position and Texture, adding to Render." << std::endl;
+        }
+        else
+            std::cout << e.getName() << " has only a Position, adding to Render as a Square." << std::endl;
+
+        // if an entity contains either a position or texture, we're good to add it to the vector
         entities.push_back(e);
     }
     else
@@ -18,7 +25,7 @@ void RenderSystem::addEntity(Entity e)
     }
 }
 
-void RenderSystem::render(SDL_Renderer* r)
+void RenderSystem::render(SDL_Renderer* r, SDL_Window* t_window)
 {
     for(auto entity : entities)
     {
@@ -36,6 +43,25 @@ void RenderSystem::render(SDL_Renderer* r)
                     tc = dynamic_cast<TextureComponent*>(comp);
             }
             renderTexture(r, pc, tc);
+        }
+        else
+        {
+            std::vector<Component*> comps = entity.getComponents();
+            PositionComponent* pc;
+
+            for (auto comp : comps)
+            {
+                if(comp->id == "pos")
+                {
+                    pc = dynamic_cast<PositionComponent*>(comp);
+                    break;
+                }
+            }
+
+            //Render red filled quad
+            SDL_Rect fillRect = { static_cast<int>(pc->m_pos.x), static_cast<int>(pc->m_pos.y), 50, 50 };
+            SDL_SetRenderDrawColor( r, 0x00, 0x00, 0x00, 0xFF );
+            SDL_RenderFillRect( r, &fillRect );
         }
     }
 }

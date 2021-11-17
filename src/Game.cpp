@@ -63,7 +63,7 @@ void Game::run()
     cortana.addComponent(new TextureComponent("../assets/images/cortana.png", renderer));
 
     dinkyDi.addComponent(new PositionComponent(Vector2(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 300.0f)));
-    dinkyDi.addComponent(new TextureComponent("../assets/images/dinky.png", renderer));
+    //dinkyDi.addComponent(new TextureComponent("../assets/images/dinky.png", renderer));
 
     // adding each Entity to all systems
     // this shows that some systems require certain components,
@@ -233,7 +233,7 @@ void Game::render()
         SDL_RenderClear(renderer);
 
         // Render System renders any Entities it can
-        rs.render(renderer);
+        rs.render(renderer, window);
 
         SDL_RenderPresent(renderer);
     }
