@@ -2,7 +2,7 @@
 
 void AISystem::addEntity(Entity e)
 {
-    std::cout << "Attemping to add Entity to AI System" << std::endl;
+    std::cout << "Attempting to add Entity to AI System" << std::endl;
     if(e.hasComponent("hp") && e.hasComponent("pos"))
     {
         std::cout << "Entity has Health and Position - Adding to AI System" << std::endl;
@@ -37,7 +37,7 @@ void AISystem::update(float& dt)
             }
 
             // Pick a new heading if alive
-            if(hc->health > 0)
+            if(hc->health > 0.0f)
             {
                 pickHeading();
             }
@@ -66,7 +66,7 @@ void AISystem::update(float& dt)
             }
 
             // AI will only move if they are alive
-            if(hc->health > 0)
+            if(hc->health > 0.0f)
             {
                 pc->m_pos = pc->m_pos + (m_heading * dt);
                 pc->m_pos = boundaryCheck(pc->m_pos);
