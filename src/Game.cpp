@@ -52,24 +52,50 @@ void Game::run()
     player.addComponent(new HealthComponent());
     player.addComponent(new InputComponent());
     player.addComponent(new PositionComponent(Vector2(100.0f, 100.0f)));
-    player.addComponent(new TextureComponent("../assets/images/ghost.png", renderer));
+    player.addComponent(new TextureComponent("../assets/images/player.png", renderer));
 
     villain.addComponent(new HealthComponent());
     villain.addComponent(new PositionComponent(Vector2(SCREEN_WIDTH - 100.0f, SCREEN_HEIGHT - 100.0f)));
     villain.addComponent(new TextureComponent("../assets/images/ai.png", renderer));
 
-    //cortana.addComponent(new HealthComponent());
-    //cortana.addComponent(new PositionComponent());
+    cortana.addComponent(new HealthComponent());
+    cortana.addComponent(new PositionComponent(Vector2(SCREEN_WIDTH - 200.0f, SCREEN_HEIGHT - 200.0f)));
+    cortana.addComponent(new TextureComponent("../assets/images/cortana.png", renderer));
 
-    //dinkyDi.addComponent(new PositionComponent());
-    
+    dinkyDi.addComponent(new PositionComponent(Vector2(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 300.0f)));
+    dinkyDi.addComponent(new TextureComponent("../assets/images/dinky.png", renderer));
+
+    // adding each Entity to all systems
+    // this shows that some systems require certain components,
+    // so not all systems will accept all entities
+    std::cout << "-----------------" << std::endl;
     hs.addEntity(player);
     cs.addEntity(player);
     rs.addEntity(player);
+    as.addEntity(player);
+
+    std::cout << "-----------------" << std::endl;
 
     hs.addEntity(villain);
+    cs.addEntity(villain);
     rs.addEntity(villain);
     as.addEntity(villain);
+
+    std::cout << "-----------------" << std::endl;
+
+    hs.addEntity(cortana);
+    cs.addEntity(cortana);
+    rs.addEntity(cortana);
+    as.addEntity(cortana);
+
+    std::cout << "-----------------" << std::endl;
+
+    hs.addEntity(dinkyDi);
+    cs.addEntity(dinkyDi);
+    rs.addEntity(dinkyDi);
+    as.addEntity(dinkyDi);
+
+    std::cout << "-----------------" << std::endl;
 
     Uint64 end = SDL_GetPerformanceCounter();
 
@@ -188,7 +214,6 @@ void Game::update(float dt)
    // std::cout << "Updating" << std::endl;
    hs.update(dt);
    cs.update(dt);
-   rs.update(dt);
    as.update(dt);
 
 }

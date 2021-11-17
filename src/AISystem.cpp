@@ -2,15 +2,17 @@
 
 void AISystem::addEntity(Entity e)
 {
-    std::cout << "Attempting to add Entity to AI System" << std::endl;
-    if(e.hasComponent("hp") && e.hasComponent("pos"))
+    std::cout << "Attempting to add " << e.getName() << " to AI System" << std::endl;
+    // Don't add any Entity that has an input component
+    // there's no need for the two components to overlap, since it will cause movement issues
+    if(e.hasComponent("hp") && e.hasComponent("pos") &&!e.hasComponent("input"))
     {
-        std::cout << "Entity has Health and Position - Adding to AI System" << std::endl;
+        std::cout << e.getName() << " has Health and Position - adding to AI System" << std::endl;
         entities.push_back(e);
     }
     else
     {
-        std::cout << "Entity is missing a required component, not adding to AI System." << std::endl;
+        std::cout << e.getName() << " is missing a required component, not adding to AI System." << std::endl;
     }
 }
 

@@ -2,15 +2,15 @@
 
 void ControlSystem::addEntity(Entity e)
 {
-    std::cout << "Attemping to add Entity to Control System" << std::endl;
+    std::cout << "Attemping to add " << e.getName() << " to Control System" << std::endl;
     if(e.hasComponent("pos") && e.hasComponent("input"))
     {
-        std::cout << "Entity has Input and Pos - Adding to Control" << std::endl;
+        std::cout << e.getName() << " has Input and Pos - adding to Control" << std::endl;
         entities.push_back(e);
     }
     else
     {
-        std::cout << "Entity is missing a required component, not adding to Control." << std::endl;
+        std::cout << e.getName() << " is missing a required component, not adding to Control." << std::endl;
     }
 }
 

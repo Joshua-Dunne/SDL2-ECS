@@ -66,10 +66,10 @@ private:
     // Used to render images to a window
     SDL_Renderer* renderer = NULL;
 
-    Entity player;
-    Entity villain;
-    //Entity cortana;
-    //Entity dinkyDi;
+    Entity player{"player"};
+    Entity villain{"villain"};
+    Entity cortana{"cortana"};
+    Entity dinkyDi{"dinky di"};
 
 
     HealthSystem hs;
